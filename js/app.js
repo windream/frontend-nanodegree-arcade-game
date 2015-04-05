@@ -91,13 +91,27 @@ Player.prototype.render = function() {
 Player.prototype.win = function() {
     this.x = 200;
     this.y = 380;
+    score.score += 1;
 }
 
 Player.prototype.die = function() {
     this.x = 200;
     this.y = 380;
+    score.score -= 1;
 }
 
+
+var Score = function() {
+    this.score = 0;
+}
+
+Score.prototype.render = function() {
+    ctx.font = '20px Courier New';
+    ctx.textAlign = 'left';
+    ctx.fillStyle = 'white';
+    ctx.fillText('Score:' + this.score.toString(), 206, 571);
+
+}
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
@@ -106,6 +120,7 @@ var enemy1 = new Enemy();
 var enemy2 = new Enemy();
 var enemy3 = new Enemy();
 var allEnemies = [enemy1, enemy2, enemy3];
+var score = new Score();
 
 var checkCollisions = function(allEnemies, player) {
     for(enemy in allEnemies){
